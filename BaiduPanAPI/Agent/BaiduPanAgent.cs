@@ -45,14 +45,19 @@ namespace BaiduPanApi.Agent
             return content.Substring(beginIndex, length);
         }
 
-        public PCSUploadResponse UploadTempFile(FileStream stream)
+        public PCSUploadResponse UploadTempFile(FileStream fileStream)
+        {
+            return UploadTempFile(Path.GetFileName(fileStream.Name), fileStream);
+        }
+
+        public PCSUploadResponse UploadTempFile(string fileName, Stream stream)
         {
             PCSUploadResponse result = HttpHelper.SendRequest(new Uri("https://c.pcs.baidu.com/rest/2.0/pcs/file?method=upload&type=tmpfile&app_id=250528"), 
                 HttpMethod.POST, 
                 new List<IHttpRequestModifier>(){
                     new HttpRequestSimpleHeaderModifier("Cookie", "BDUSS=" + BDUSS),
                     new HttpRequestMultipartFormModifier(null, new KeyValuePairList<string, HttpRequestMultipartFormModifier.FileInfo>(){
-                        { "Filedata", new HttpRequestMultipartFormModifier.FileInfo(stream) }
+                        { "Filedata", new HttpRequestMultipartFormModifier.FileInfo(fileName, stream) }
                     })
                 },
                 new HttpResponseJSONObjectParser<PCSUploadResponse>(),

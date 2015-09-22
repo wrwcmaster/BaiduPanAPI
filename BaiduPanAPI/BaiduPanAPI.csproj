@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gaia.Common">
-      <HintPath>..\..\Gaia.Common\CommonLib\bin\Debug\Gaia.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -53,6 +50,12 @@
     <Compile Include="Agent\Model\PanTorrentQueryResponse.cs" />
     <Compile Include="Agent\Model\PCSUploadResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gaia.Common\CommonLib\CommonLib.csproj">
+      <Project>{c586e3c8-1870-4054-833e-cf4322c31e44}</Project>
+      <Name>CommonLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
